@@ -25,9 +25,9 @@
 
 		.history {
 			// border: 1px solid red;
-			font-size: 0.8rem;
+			font-size: 1.2rem;
 			text-align: right;			
-			padding: 0.5rem 0 0 0;
+			// padding: 0.2rem 0 0 0;
 			line-height: 1rem;
 			&:after {
 				content: "";
@@ -59,6 +59,7 @@
 			height: 40px;
 			border: none;
 			border-radius: 50%;
+			font-size: 1rem;
 
 			&:active {
 				transform: scale(0.98);
@@ -94,6 +95,7 @@
 			.number {
 				color: $darkgray;
 				background-color: transparent;
+				
 
 				&:active {
 					background-color: $lightgray;
