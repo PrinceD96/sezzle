@@ -19,14 +19,29 @@
 		width: 100%;
 		border-bottom: 1px solid $gray;
 		display: flex;
-		justify-content: flex-end;
+		flex-direction: column;
 		align-items: flex-end;
+		overflow: hidden;
+
+		.history {
+			// border: 1px solid red;
+			font-size: 0.8rem;
+			text-align: right;			
+			padding: 0.5rem 0 0 0;
+			line-height: 1rem;
+			&:after {
+				content: "";
+				display: inline-block;
+				width: 0px;
+			}
+		}
 
 		.result {
 			font-size: xxx-large;
 			color: $black;
 			margin: 0;
 			margin-bottom: 10px;
+			max-width: 100%;
 		}
 	}
 
@@ -44,6 +59,14 @@
 			height: 40px;
 			border: none;
 			border-radius: 50%;
+
+			&:active {
+				transform: scale(0.98);
+			}
+
+			&:focus {
+				outline: none;
+			}
 		}
 
 		.operators__top {
@@ -71,6 +94,10 @@
 			.number {
 				color: $darkgray;
 				background-color: transparent;
+
+				&:active {
+					background-color: $lightgray;
+				}
 			}
 		}
 

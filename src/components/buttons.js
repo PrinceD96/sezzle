@@ -1,5 +1,3 @@
-import React from 'react'
-
 export const numbers = [
   { label: 7, className: "number" },
   { label: 8, className: "number" },
@@ -29,15 +27,36 @@ export const operators2 = [
   { label: "=", className: "equal" },
 ];
 
-  
-export const buttonMapper = (array, callback) => 
-    array.map(({label, className}, index) => (
-      <button 
-      value={label} 
+
+export const buttonMapper = (array, op, callback) =>
+  array.map(({ label, className }, index) => (
+    <button
+      value={label}
       key={index}
       className={className}
       onClick={callback}
-      >
-        {label}
-      </button>
-   ))
+    >
+      {label}
+    </button>
+  ))
+
+export const isParenthesesNeeded = (op, value) => {
+  if (!op) {
+    return false;
+  }
+
+  if (op === value) {
+    return false;
+  }
+
+  switch (value) {
+    case "+":
+    case "-":
+      return !(op === "+" || op === "-");
+    case "/":
+    case "*":
+      return !(op === "/" || op === "*");
+    default:
+      return true;
+  }
+};
