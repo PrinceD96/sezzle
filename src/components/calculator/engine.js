@@ -1,6 +1,6 @@
 export const engine = (n1, op, n2) => {
-  n1 = Number(n1);
-  n2 = Number(n2);
+  n1 = parseFloat(n1);
+  n2 = parseFloat(n2);
 
   switch (op) {
     case "/":

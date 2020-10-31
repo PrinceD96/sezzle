@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
 import { numbers, operators1, operators2, buttonMapper, isParenthesesNeeded as isPNeeded } from './buttons'
-import { engine } from './engine'
+import { engine } from './engine.js'
 
 export default function Calculator() {
   const [num1, setNum1] = useState("0");
