@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { firestore } from '../../config/Firebase'
 
 import { numbers, operators1, operators2, buttonMapper, isParenthesesNeeded as isPNeeded } from './buttons'
 import { engine } from './engine.js'
@@ -10,6 +11,7 @@ export default function Calculator() {
   const [display, setDisplay] = useState("0");
   const [history, setHistory] = useState("");
   const [isResult, setIsResult] = useState(false);
+  const [log, setLog] = useState('')
 
   const handleNumberPress = (e) => {
     let value = e.target.textContent;
@@ -39,12 +41,10 @@ export default function Calculator() {
         let parentheses_open = isPNeeded(operator, value) ? "(" : "";
         let parentheses_close = isPNeeded(operator, value) ? ")" : "";
         let result = engine(num1, operator, num2);
-
-        setHistory(parentheses_open + history + operator + num2 + parentheses_close);
-
+        setHistory((`${parentheses_open}${history} ${operator} ${num2}${parentheses_close}`));
         setNum1(String(result % 1 === 0 ? result : result.toFixed(2)));
         setNum2("");
-        setOperator("");
+        setOperator("=");
         setIsResult(true);
       }
     } else if (!operator || (operator && !num2)) {
@@ -64,7 +64,7 @@ export default function Calculator() {
         // If result is float, fix it to 2 decimals
         result = result % 1 === 0 ? result : result.toFixed(2);
 
-        setHistory(parentheses_open + history + operator + num2 + parentheses_close);
+        setHistory(`${parentheses_open}${history} ${operator} ${num2}${parentheses_close}`);
 
         setNum1(String(result));
         setNum2("");
@@ -84,7 +84,14 @@ export default function Calculator() {
 
   useEffect(() => {
     setHistory(history => history.replace(/(\(|\))/gmi, "").replace('/', '÷'))
+    setLog(`${history} = ${num1}`)
   }, [history])
+
+  useEffect(() => {
+    if (isResult && !log.includes('(')) {
+      console.log(log)
+    }
+  }, [log])
 
   return (
     <div className='calculator'>
