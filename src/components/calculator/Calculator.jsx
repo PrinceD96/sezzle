@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import firebase from 'firebase/app'
 import { firestore } from '../../config/Firebase'
 
 import { numbers, operators1, operators2, buttonMapper, isParenthesesNeeded as isPNeeded } from './buttons'
@@ -74,6 +75,19 @@ export default function Calculator() {
     }
   };
 
+  const sendLogsToDB = async (log) => {
+    try {
+      const calculationsRef = firestore.collection('calculations')
+      calculationsRef.add({
+        calc: log,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+        user: 50
+      })
+    } catch (error) {
+      console.error({ error })
+    }
+  }
+
   useEffect(() => {
     setDisplay(num2);
   }, [num2]);
@@ -89,7 +103,7 @@ export default function Calculator() {
 
   useEffect(() => {
     if (isResult && !log.includes('(')) {
-      console.log(log)
+      sendLogsToDB(log)
     }
   }, [log])
 
