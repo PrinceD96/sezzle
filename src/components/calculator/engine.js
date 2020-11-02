@@ -11,6 +11,10 @@ export const engine = (n1, op, n2) => {
       return n1 + n2;
     case "-":
       return n1 - n2;
+    case "%":
+      return (n1) / 100;
+    case "+/-":
+      return (n1) === 0 ? "0" : (n1 * -1).toString();
     default:
       return n1;
   }

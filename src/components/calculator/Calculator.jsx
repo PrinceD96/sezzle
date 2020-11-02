@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import firebase from 'firebase/app'
-import { firestore } from '../../config/Firebase'
+import { firestore, auth } from '../../config/Firebase'
 
 import { numbers, operators1, operators2, buttonMapper, isParenthesesNeeded as isPNeeded } from './buttons'
 import { engine } from './engine.js'
@@ -78,10 +78,11 @@ export default function Calculator() {
   const sendLogsToDB = async (log) => {
     try {
       const calculationsRef = firestore.collection('calculations')
+      const { uid } = auth.currentUser
       calculationsRef.add({
         calc: log,
         createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-        user: 50
+        user: uid
       })
     } catch (error) {
       console.error({ error })
@@ -97,15 +98,17 @@ export default function Calculator() {
   }, [num1]);
 
   useEffect(() => {
-    setHistory(history => history.replace(/(\(|\))/gmi, "").replace('/', '÷'))
-    setLog(`${history} = ${num1}`)
-  }, [history])
+    setHistory(history => history.replace('/', '÷'))
+    setLog(`${history.replace('/', '÷')} = ${num1}`)
+  }, [history, num1])
 
   useEffect(() => {
-    if (isResult && !log.includes('(')) {
+    console.log(log.length)
+    if (isResult && log.length > 5) {
       sendLogsToDB(log)
+      setLog("")
     }
-  }, [log])
+  }, [isResult, log])
 
   return (
     <div className='calculator'>

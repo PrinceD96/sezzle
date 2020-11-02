@@ -4,14 +4,21 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 import Calculator from './components/calculator/Calculator'
 import Calculations from './components/calculations/Calculations'
 import './styles/App.scss';
+import { SignIn } from './components/authentication/Auth'
 
 function App() {
   const [user] = useAuthState(auth)
   return (
-    <div className="App">
-      <Calculator />
-      <Calculations />
-    </div>
+    <section className="App">
+      {user ? (
+        <>
+          <Calculator />
+          <Calculations />
+        </>
+      ) : (
+          <SignIn />
+        )}
+    </section>
   );
 }
 

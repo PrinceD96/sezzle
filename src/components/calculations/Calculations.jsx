@@ -12,7 +12,7 @@ export default function Calculations() {
   return (
     <div>
       {calculations && calculations.map(({ calc }, index) => (
-        <p key={index}>{calc}</p>
+        <p key={index} className='calculations'>{calc}</p>
       ))}
     </div>
   )
