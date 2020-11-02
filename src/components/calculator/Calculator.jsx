@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react'
+import firebase from 'firebase/app'
+import { firestore, auth } from '../../config/Firebase'
 
 import { numbers, operators1, operators2, buttonMapper, isParenthesesNeeded as isPNeeded } from './buttons'
-import { engine } from './engine'
+import { engine } from './engine.js'
 
 export default function Calculator() {
   const [num1, setNum1] = useState("0");
@@ -10,6 +12,7 @@ export default function Calculator() {
   const [display, setDisplay] = useState("0");
   const [history, setHistory] = useState("");
   const [isResult, setIsResult] = useState(false);
+  const [log, setLog] = useState('')
 
   const handleNumberPress = (e) => {
     let value = e.target.textContent;
@@ -39,12 +42,10 @@ export default function Calculator() {
         let parentheses_open = isPNeeded(operator, value) ? "(" : "";
         let parentheses_close = isPNeeded(operator, value) ? ")" : "";
         let result = engine(num1, operator, num2);
-
-        setHistory(parentheses_open + history + operator + num2 + parentheses_close);
-
+        setHistory((`${parentheses_open}${history} ${operator} ${num2}${parentheses_close}`));
         setNum1(String(result % 1 === 0 ? result : result.toFixed(2)));
         setNum2("");
-        setOperator("");
+        setOperator("=");
         setIsResult(true);
       }
     } else if (!operator || (operator && !num2)) {
@@ -64,7 +65,7 @@ export default function Calculator() {
         // If result is float, fix it to 2 decimals
         result = result % 1 === 0 ? result : result.toFixed(2);
 
-        setHistory(parentheses_open + history + operator + num2 + parentheses_close);
+        setHistory(`${parentheses_open}${history} ${operator} ${num2}${parentheses_close}`);
 
         setNum1(String(result));
         setNum2("");
@@ -73,6 +74,20 @@ export default function Calculator() {
       }
     }
   };
+
+  const sendLogsToDB = async (log) => {
+    try {
+      const calculationsRef = firestore.collection('calculations')
+      const { uid } = auth.currentUser
+      calculationsRef.add({
+        calc: log,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+        user: uid
+      })
+    } catch (error) {
+      console.error({ error })
+    }
+  }
 
   useEffect(() => {
     setDisplay(num2);
@@ -83,8 +98,17 @@ export default function Calculator() {
   }, [num1]);
 
   useEffect(() => {
-    setHistory(history => history.replace(/(\(|\))/gmi, "").replace('/', '÷'))
-  }, [history])
+    setHistory(history => history.replace('/', '÷'))
+    setLog(`${history.replace('/', '÷')} = ${num1}`)
+  }, [history, num1])
+
+  useEffect(() => {
+    console.log(log.length)
+    if (isResult && log.length > 5) {
+      sendLogsToDB(log)
+      setLog("")
+    }
+  }, [isResult, log])
 
   return (
     <div className='calculator'>

@@ -1,13 +1,25 @@
 @import 'colors';
 
+body {
+	background-color: $skyblue;
+}
+
 .App {
-	margin: 10em auto;
+	margin: 5em auto;
 	box-sizing: border-box;
 	display: flex;
 	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.logo {
+	width: 500px;
+	height: 800px;
 }
 
 .calculator {
+	background-color: $white;
 	border: 2px solid $gray;
 	padding: 1rem;
 	width: 200px;
@@ -15,20 +27,22 @@
 	border-radius: 10px;
 
 	.display {
+		// border: 1px solid blue;
 		height: 30%;
 		width: 100%;
 		border-bottom: 1px solid $gray;
 		display: flex;
 		flex-direction: column;
 		align-items: flex-end;
+		justify-content: space-evenly;
 		overflow: hidden;
 
 		.history {
 			// border: 1px solid red;
-			font-size: 0.8rem;
-			text-align: right;			
-			padding: 0.5rem 0 0 0;
-			line-height: 1rem;
+			font-size: 1rem;
+			text-align: right;		
+			padding: 0.2rem 0 0 0;
+
 			&:after {
 				content: "";
 				display: inline-block;
@@ -37,7 +51,7 @@
 		}
 
 		.result {
-			font-size: xxx-large;
+			font-size: 2.5rem;
 			color: $black;
 			margin: 0;
 			margin-bottom: 10px;
@@ -59,6 +73,7 @@
 			height: 40px;
 			border: none;
 			border-radius: 50%;
+			font-size: 1rem;
 
 			&:active {
 				transform: scale(0.98);
@@ -94,6 +109,7 @@
 			.number {
 				color: $darkgray;
 				background-color: transparent;
+				
 
 				&:active {
 					background-color: $lightgray;
@@ -121,4 +137,9 @@
 			color: $white;
 		}
 	}
+}
+
+.calculations {
+	margin-top: 50px;
+	color: $brown
 }
