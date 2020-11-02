@@ -22,7 +22,7 @@ export default function Calculations() {
   return (
     <div>
       {calculations && calculations.map(({ calc, user, id }, index) => (
-        <p key={index} className={`calculations ${user === uid ? 'own' : ''}`}>{calc} {user === uid && <span onClick={() => deleteCalculation(id)}><DeleteIcon color='action' /></span>}</p>
+        <p key={index} className={`calculations ${user === uid ? 'own' : ''}`}>{calc} {user === uid && <span onClick={() => deleteCalculation(id)}><DeleteIcon color='action' className='delete'/></span>}</p>
       ))}
 
     </div>

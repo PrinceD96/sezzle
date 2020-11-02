@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGoogle } from '@fortawesome/free-brands-svg-icons'
-import { faSignInAlt } from '@fortawesome/free-solid-svg-icons'
+import { faSignInAlt, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
 
 import logo from '../../assets/calc.svg'
 
@@ -73,7 +73,28 @@ export function SignIn() {
 }
 
 export function SignOut() {
+
+  const useStyles = makeStyles((theme) =>
+  createStyles({
+    button: {
+      margin: theme.spacing(2),
+      width: '250px',
+      borderRadius: 20
+    },
+  }),
+);
+
+const classes = useStyles();
+
   return auth.currentUser && (
-    <button onClick={() => auth.signOut()}>Sign Out</button>
+    <Button
+    onClick={() => auth.signOut()}
+    variant="contained"
+    color='primary'
+    className={classes.button}
+    startIcon={<FontAwesomeIcon icon={faSignOutAlt}/>}
+  >
+    Sign Out
+  </Button>
   )
 }

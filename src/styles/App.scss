@@ -184,6 +184,13 @@ body {
 
 	.calculations {
 		color: $brown;
+		display: flex;
+		align-items: center;
+
+		.delete {
+			display: flex;
+			align-items: flex-end;
+		}
 	}
 
 	.own {
