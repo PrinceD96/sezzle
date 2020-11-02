@@ -14,7 +14,6 @@ export default function Calculator() {
   const [history, setHistory] = useState("");
   const [isResult, setIsResult] = useState(false);
   const [log, setLog] = useState('')
-  const [logId, setLogId] = useState('')
 
   const handleNumberPress = (e) => {
     let value = e.target.textContent;
