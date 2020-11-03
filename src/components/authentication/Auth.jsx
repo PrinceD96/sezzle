@@ -30,7 +30,7 @@ export function SignIn() {
   createStyles({
     button: {
       margin: theme.spacing(2),
-      width: '70%',
+      width: '75%',
       borderRadius: 20
     },
   }),
