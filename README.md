@@ -33,6 +33,5 @@ console.
 - Sass
 - Material UI
 
-## Demo:
-
+### Demo
 ![Sezzle Calculator Demo](demo/sezzle-calculator.gif)
