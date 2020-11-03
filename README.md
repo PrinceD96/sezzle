@@ -16,7 +16,7 @@ You will also see any lint errors in the console.
 Why did I build Sezzle Calculator?
 * This is a project I was given to grade my skills for a software engineer intern position at [Sezzle](https://sezzle.com).
 
-What is Sezzle Calculator?\
+What is Sezzle Calculator?
 * As the name implies this is a calculator able to do basic arithmetic operations (for now). Users can make calculations and see them as they happen. They can delete their own calculations and see the 10 most recent ones across all users.
 
 Technologies used:
