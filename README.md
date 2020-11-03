@@ -1,9 +1,9 @@
 # Getting Started with Sezzle Calculator
 
 In the project directory, you can run:
-
-  1. `yarn install`
-  2. `yarn start`
+  1. Clone this project https://github.com/PrinceD96/sezzle.git
+  2. `yarn install`
+  3. `yarn start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
