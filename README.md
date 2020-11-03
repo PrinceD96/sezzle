@@ -22,4 +22,3 @@ Technologies used:
 * Firebase
 * Sass
 * Material UI
-
