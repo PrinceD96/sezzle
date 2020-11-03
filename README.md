@@ -8,10 +8,10 @@ In the project directory, you can run:
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
+The page will reload if you make edits.
 You will also see any lint errors in the console.
 
-Why did I build Sezzle Calculator?\
+Why did I build Sezzle Calculator?
 * This is a project I was given to grade my skills for a software engineer intern position at [Sezzle](https://sezzle.com).
 
 What is Sezzle Calculator?\
