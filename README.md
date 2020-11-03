@@ -32,3 +32,5 @@ Technologies used:
 - Firebase
 - Sass
 - Material UI
+
+![Sezzle Calculator Demo](demo/sezzle-calculator.gif)
