@@ -38,35 +38,37 @@ export default function Calculator() {
       setOperator("");
       setHistory("");
       setIsResult(false);
-    } else if (value === "=") {
-      if (operator) {
-        
-        console.log(1)
-        console.log({num1, num2, operator, history})
-      }
+    }
+    
+    //TODO Limiting the functionality for now
+    else if (value === '%' || value === '+/-') {
+      return
+   }
+    
+    else if (value === "=") {
       if (num1 && operator && operator !== '=' && num2) {
         let parentheses_open = isPNeeded(operator, value) ? "(" : "";
         let parentheses_close = isPNeeded(operator, value) ? ")" : "";
         let result = engine(num1, operator, num2);
-        setHistory((`${parentheses_open}${history} ${operator} ${num2}${parentheses_close}`));
+        setHistory((`${parentheses_open}${history} ${operator === "+/-" ? "" : operator} ${num2}${parentheses_close}`));
         setNum1(String(result % 1 === 0 ? result : result.toFixed(2)));
         setNum2("");
-        // setOperator("=");
         setIsResult(true);
       }
     } else if (!operator || (operator && !num2)) {
-      console.log(2)
-      console.log({num1, num2, operator, history})
       let parentheses_open = num2 && isNaN(history) && isPNeeded(operator, value) ? "(" : "";
       let parentheses_close = num2 && isNaN(history) && isPNeeded(operator, value) ? ")" : "";
 
       setOperator(value);
       setHistory(
-        parentheses_open + history + (isResult ? "" : num2 && !operator ? "" : (num1 === '0' ? '' : num1) ) + parentheses_close
+        parentheses_open + history + (isResult 
+          ? "" 
+          : num2 && !operator 
+          ? "" 
+          : (num1 === '0' || operator === value ? '' : num1) ) + parentheses_close
       );
     } else {
       if (num2) {
-        console.log(3)
         let parentheses_open = isNaN(history) && isPNeeded(operator, value) ? "(" : "";
         let parentheses_close = isNaN(history) && isPNeeded(operator, value) ? ")" : "";
         let result = engine(num1, operator, num2);
