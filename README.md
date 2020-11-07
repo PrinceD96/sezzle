@@ -2,11 +2,10 @@
 
 See it deployed at https://sezzle-27eb8.web.app
 
-### In the project directory, you can run:
-
 1. Clone this project https://github.com/PrinceD96/sezzle.git
-2. `yarn install`
-3. `yarn start`
+2. In the project directory, you can run:
+    * `yarn install`
+    * `yarn start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
