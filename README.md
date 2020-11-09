@@ -1,6 +1,6 @@
 # Getting Started with Sezzle Calculator
 
-See it deployed at https://sezzle-27eb8.web.app
+### See it deployed at https://sezzle-27eb8.web.app
 
 1. Clone this project https://github.com/PrinceD96/sezzle.git
 2. In the project directory, you can run:
